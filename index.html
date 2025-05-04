@@ -168,52 +168,92 @@ document.addEventListener('contextmenu', e => e.preventDefault());
   setInterval(updateTimer, 1000);
   updateTimer();
 </script>
-<section <section style="text-align:center; margin: 40px 0;">
-  <h2 style="font-size: 1.6em;">Твоя карта будет активирована завтра! (хихихи)</h2>
-  <div style="
+<section <style>
+  .zavtra-card-wrapper {
+    perspective: 1000px;
     display: inline-block;
+  }
+
+  .zavtra-card {
     width: 320px;
     height: 190px;
     border-radius: 15px;
     background: linear-gradient(135deg, #ff8a00, #e52e71);
     color: white;
     padding: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     font-family: 'Arial Black', sans-serif;
     position: relative;
     overflow: hidden;
-  ">
+    transition: transform 0.2s ease;
+    animation: sway 3s ease-in-out infinite;
+    transform-style: preserve-3d;
+  }
 
-    <!-- Логотип -->
-    <div style="font-size: 1em; letter-spacing: 1px;">ZAVTRABANK</div>
+  .zavtra-card:hover {
+    animation: none;
+  }
 
-    <!-- Номер карты -->
-    <div style="
-      font-size: 1.4em;
-      letter-spacing: 2px;
-      margin-top: 30px;
-    ">
-      1337 228 1488 000 ZAVTRA
+  @keyframes sway {
+    0%, 100% { transform: rotateY(-2deg); }
+    50% { transform: rotateY(2deg); }
+  }
+
+  @keyframes blink {
+    0%, 100% { color: #fff; }
+    50% { color: #ffd700; }
+  }
+
+  .blink {
+    animation: blink 1s infinite;
+  }
+</style>
+
+<section style="text-align:center; margin: 40px 0;">
+  <h2 style="font-size: 1.6em;">Твоя карта будет активирована завтра (хихихи)!</h2>
+
+  <div class="zavtra-card-wrapper" onmousemove="rotateCard(event)" onmouseleave="resetCard()">
+    <div class="zavtra-card" id="card">
+
+      <div style="font-size: 1em; letter-spacing: 1px;">ZAVTRABANK</div>
+
+      <div style="font-size: 1.4em; letter-spacing: 2px; margin-top: 30px;">
+        1337 228 1488 4252 <span class="blink">ЗАВТРА</span>
+      </div>
+
+      <div style="display: flex; justify-content: space-between; margin-top: 30px; font-size: 0.8em;">
+        <div>ZAVTRA CLIENT</div>
+        <div>VALID: 00/00</div>
+      </div>
+
+      <div style="position: absolute; bottom: 10px; right: 15px; font-size: 0.7em; font-style: italic; color: rgba(255,255,255,0.7);">
+        Powered by ожидание
+      </div>
+
     </div>
-
-    <!-- Имя владельца и срок -->
-    <div style="display: flex; justify-content: space-between; margin-top: 30px; font-size: 0.8em;">
-      <div>ZAVTRA CLIENT</div>
-      <div>VALID: 00/00</div>
-    </div>
-
-    <!-- Мемная надпись -->
-    <div style="
-      position: absolute;
-      bottom: 10px;
-      right: 15px;
-      font-size: 0.7em;
-      font-style: italic;
-      color: rgba(255,255,255,0.7);
-    ">
-      Powered by ожидание
-    </div>
-
   </div>
-  <p style="color: gray; margin-top: 8px;">* #ZavtraBank</p>
+
+  <p style="color: gray; margin-top: 8px;">#ZavtraBank</p>
 </section>
+
+<script>
+  function rotateCard(e) {
+    const card = document.getElementById('card');
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = -(y - centerY) / 20;
+    const rotateY = (x - centerX) / 20;
+
+    card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+  }
+
+  function resetCard() {
+    const card = document.getElementById('card');
+    card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+  }
+</script>
