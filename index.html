@@ -168,7 +168,7 @@ document.addEventListener('contextmenu', e => e.preventDefault());
   setInterval(updateTimer, 1000);
   updateTimer();
 </script>
-<section <style>
+<style>
   .zavtra-card-wrapper {
     perspective: 1000px;
     display: inline-block;
@@ -210,15 +210,14 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 </style>
 
 <section style="text-align:center; margin: 40px 0;">
-  <h2 style="font-size: 1.6em;">Твоя карта будет активирована завтра (хихихи)!</h2>
+  <h2 style="font-size: 1.6em;">Твоя карта уже почти у тебя!</h2>
 
   <div class="zavtra-card-wrapper" onmousemove="rotateCard(event)" onmouseleave="resetCard()">
     <div class="zavtra-card" id="card">
-
       <div style="font-size: 1em; letter-spacing: 1px;">ZAVTRABANK</div>
 
       <div style="font-size: 1.4em; letter-spacing: 2px; margin-top: 30px;">
-        1337 228 1488 4252 <span class="blink">ЗАВТРА</span>
+        0000 0000 0000 <span class="blink">ЗАВТРА</span>
       </div>
 
       <div style="display: flex; justify-content: space-between; margin-top: 30px; font-size: 0.8em;">
@@ -229,11 +228,10 @@ document.addEventListener('contextmenu', e => e.preventDefault());
       <div style="position: absolute; bottom: 10px; right: 15px; font-size: 0.7em; font-style: italic; color: rgba(255,255,255,0.7);">
         Powered by ожидание
       </div>
-
     </div>
   </div>
 
-  <p style="color: gray; margin-top: 8px;">#ZavtraBank</p>
+  <p style="color: gray; margin-top: 8px;">* карта будет активирована завтра</p>
 </section>
 
 <script>
