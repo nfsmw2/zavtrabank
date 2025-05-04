@@ -175,3 +175,32 @@ document.addEventListener('contextmenu', e => e.preventDefault());
   <button onclick="earnCoins()" style="padding: 10px 20px; font-size: 16px;">Заработать завтракойны</button>
   <p id="achievement" style="color: green; font-weight: bold;"></p>
 </div>
+<script>
+let balance = localStorage.getItem('zavtrabank_balance') || 100;
+balance = parseInt(balance);
+document.getElementById('balance').textContent = balance;
+updateRank();
+
+function earnCoins() {
+  balance += 5;
+  document.getElementById('balance').textContent = balance;
+  localStorage.setItem('zavtrabank_balance', balance);
+  updateRank();
+  checkAchievement();
+}
+
+function updateRank() {
+  let rank = "Новичок";
+  if (balance >= 500) rank = "Банкир Будущего";
+  else if (balance >= 200) rank = "Финансовый Иллюзионист";
+  else if (balance >= 100) rank = "ФинАнальтик";
+  document.getElementById('rank').textContent = rank;
+}
+
+function checkAchievement() {
+  if (balance >= 150 && !localStorage.getItem('zbc_ach_150')) {
+    document.getElementById('achievement').textContent = "Достижение: Первый заработок!";
+    localStorage.setItem('zbc_ach_150', 'true');
+  }
+}
+</script>
